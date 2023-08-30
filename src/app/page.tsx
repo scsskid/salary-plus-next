@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import styles from './page.module.css';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/supabaseClient';
 import Link from 'next/link';
+import AddPage from './add/page';
 
 export const metadata: Metadata = {
 	title: 'Salary Plus Next',
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 export default async function Home() {
 	const { data: entries } = await supabase.from('WorkingEntries').select('*');
 
-	console.log(entries);
+	// console.log(entries);
 
 	if (!entries) {
 		return <p>Couldn&apos;t load data.</p>;
@@ -30,6 +31,9 @@ export default async function Home() {
 						</li>
 					))}
 				</ul>
+				<section>
+					<AddPage />
+				</section>
 			</div>
 		</main>
 	);
