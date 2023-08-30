@@ -6,8 +6,8 @@ import { experimental_useFormStatus as useFormStatus } from 'react-dom';
 
 export default function AddPage() {
 	return (
-		<div>
-			<h2 className={styles.heading}>AddPage</h2>
+		<div className="flow">
+			<h2 className={styles.heading}>Add Entry</h2>
 			<form action={createWorkingEntry}>
 				<label htmlFor="begin">Begin</label>
 				<input type="datetime-local" name="begin" id="begin" required />
