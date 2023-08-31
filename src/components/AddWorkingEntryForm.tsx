@@ -15,17 +15,31 @@ export default async function AddWorkingEntryForm({
 			<form action={createWorkingEntry}>
 				<div className="form-element">
 					<label htmlFor="begin">Begin</label>
-					<input type="datetime-local" name="begin" id="begin" required />
+					<input
+						type="datetime-local"
+						name="begin"
+						id="begin"
+						defaultValue={new Date().toISOString().split('.')[0] + ''}
+						required
+					/>
 				</div>
 				<div className="form-element">
 					<label htmlFor="end">End</label>
-					<input type="datetime-local" name="end" id="end" required />
+					<input
+						type="datetime-local"
+						name="end"
+						id="end"
+						defaultValue={new Date().toISOString().split('.')[0] + ''}
+						required
+					/>
 				</div>
 				<div className="form-element">
 					{error && <p>Error: {error.message}</p>}
 					<label htmlFor="job_id">Job</label>
-					<select name="job_id" id="job_id">
-						<option value="">--Please choose a job--</option>
+					<select name="job_id" id="job_id" required defaultValue={''}>
+						<option value="" disabled>
+							--Please choose a job--
+						</option>
 						{jobs?.map(({ id, title }) => (
 							<option value={id} key={id}>
 								{title}
