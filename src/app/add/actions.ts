@@ -9,7 +9,8 @@ export async function createWorkingEntry(formData: FormData) {
 		.insert({
 			begin: formData.get('begin') as string,
 			end: formData.get('end') as string,
-			job_id: 1,
+			/* @ts-ignore */
+			job_id: parseInt(formData.get('job_id')),
 			user_id: 1,
 			sick_leave: false,
 		})

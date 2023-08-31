@@ -23,8 +23,6 @@ export default async function Home() {
 	`
 	);
 
-	console.log(entries);
-
 	if (!entries) {
 		return <p>Couldn&apos;t load data.</p>;
 	}

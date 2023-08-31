@@ -21,3 +21,18 @@ body,
 .wrap {
 	padding: 1rem;
 }
+
+/* forms */
+
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+form > * + * {
+	margin-top: 1rem;
+}
+
+label {
+	display: flex;
+}
