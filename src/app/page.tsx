@@ -10,9 +10,20 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-	const { data: entries } = await supabase.from('WorkingEntries').select('*');
+	const { data: entries } = await supabase.from('WorkingEntries').select(
+		`
+	id,
+	begin,
+	end,
+	job_id,
+	Jobs (
+		id,
+		title
+	)
+	`
+	);
 
-	// console.log(entries);
+	console.log(entries);
 
 	if (!entries) {
 		return <p>Couldn&apos;t load data.</p>;
@@ -25,9 +36,12 @@ export default async function Home() {
 				<p>foo</p>
 				<p>Entries</p>
 				<ul>
-					{entries.map(({ begin, id }) => (
+					{/* @ts-ignore (Jobs.title can't be null) */}
+					{entries.map(({ begin, id, end, Jobs: { title: foo } }) => (
 						<li key={id}>
-							{id} → {new Date(begin).toLocaleTimeString()}
+							{id} → {new Date(begin).toLocaleDateString('de')}{' '}
+							{new Date(begin).toLocaleTimeString('de')} -{' '}
+							{new Date(end).toLocaleTimeString('de')} ({foo})
 						</li>
 					))}
 				</ul>
