@@ -7,7 +7,9 @@ type Props = {};
 export default function Header({}: Props) {
 	return (
 		<header className={`wrap ${styles.header}`}>
-			<p className={styles.logo}>Salary Plus Next</p>
+			<p className={styles.logo}>
+				<Link href={'/'}>Salary Plus Next</Link>
+			</p>
 			<nav hidden>
 				<ol>
 					<li>
