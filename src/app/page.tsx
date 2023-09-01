@@ -7,6 +7,7 @@ import { deleteWorkingEntry, deleteJob } from '@/lib/server-actions';
 import { getWorkingEntries, getJobs } from '@/lib/dataFetchers';
 import DeleteButton from '@/components/DeleteButton';
 import { AddWorkingEntryForm } from '@/components/WorkingEntryForm';
+import { formatWithTwoDecimals, getDateDifferenceInHouse } from '@/lib/helpers';
 
 export const metadata: Metadata = {
 	title: 'Salary Plus Next',
@@ -33,9 +34,10 @@ export default async function Home() {
 				<section>
 					<h2>Jobs</h2>
 					<ul>
-						{userJobs.map(({ id, title }) => (
+						{userJobs.map(({ id, title, simple_wage }) => (
 							<li key={id}>
-								{title} <DeleteButton id={id} handler={deleteJob} />
+								{title} ({formatWithTwoDecimals(simple_wage)} €/h)
+								<DeleteButton id={id} handler={deleteJob} />
 							</li>
 						))}
 					</ul>
@@ -53,6 +55,7 @@ export default async function Home() {
 									{id} → {new Date(begin).toLocaleDateString('de')}{' '}
 									{new Date(begin).toLocaleTimeString('de')} -{' '}
 									{new Date(end).toLocaleTimeString('de')} ({jobTitle})
+									{getDateDifferenceInHouse(new Date(begin), new Date(end))}h
 									<Link href={`/account/entries/${id}`}>Edit</Link>{' '}
 									<DeleteButton id={id} handler={deleteWorkingEntry} />
 								</li>

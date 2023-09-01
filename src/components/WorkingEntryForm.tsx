@@ -1,13 +1,15 @@
-import { PostgrestError } from '@supabase/supabase-js';
 import SubmitButton from './SubmitButton';
 import { supabase } from '@/lib/supabaseClient';
 import { createWorkingEntry, updateWorkingEntry } from '@/lib/server-actions';
-
-import type { Tables } from '@/types/helper-types';
-type Job = Tables<'Jobs'>;
+import { getJobs } from '@/lib/dataFetchers';
+import { getDefaultValueForInputDateTimeLocal } from '@/lib/helpers';
 
 export async function AddWorkingEntryForm() {
-	const { jobs, error } = await getJobs();
+	const jobs = await getJobs();
+
+	if (!jobs) {
+		return <p>Couldn&apos;t load jobs data.</p>;
+	}
 
 	return (
 		<form action={createWorkingEntry}>
@@ -21,7 +23,9 @@ export async function AddWorkingEntryForm() {
 						type="datetime-local"
 						name="begin"
 						id="begin"
-						defaultValue={new Date().toISOString().split('.')[0] + ''}
+						defaultValue={(() => {
+							return getDefaultValueForInputDateTimeLocal(new Date());
+						})()}
 						required
 					/>
 				</div>
@@ -31,12 +35,13 @@ export async function AddWorkingEntryForm() {
 						type="datetime-local"
 						name="end"
 						id="end"
-						defaultValue={new Date().toISOString().split('.')[0] + ''}
+						defaultValue={(() => {
+							return getDefaultValueForInputDateTimeLocal(new Date());
+						})()}
 						required
 					/>
 				</div>
 				<div className="form-element">
-					{error && <p>Error: {error.message}</p>}
 					<label htmlFor="job_id">Job</label>
 					<select name="job_id" id="job_id" required defaultValue={''}>
 						<option value="" disabled>
@@ -80,7 +85,7 @@ export async function EditWorkingEntryForm({ id }: { id: string }) {
 
 	console.log(entry);
 
-	const { jobs, error } = await getJobs();
+	const jobs = await getJobs();
 
 	/*  @ts-ignore */
 	const selectDefaultValue = entry.Jobs.id;
@@ -97,7 +102,11 @@ export async function EditWorkingEntryForm({ id }: { id: string }) {
 						type="datetime-local"
 						name="begin"
 						id="begin"
-						defaultValue={entry.begin.split('+')[0] + ''}
+						defaultValue={(() => {
+							return getDefaultValueForInputDateTimeLocal(
+								new Date(entry.begin)
+							);
+						})()}
 						required
 					/>
 				</div>
@@ -107,12 +116,13 @@ export async function EditWorkingEntryForm({ id }: { id: string }) {
 						type="datetime-local"
 						name="end"
 						id="end"
-						defaultValue={entry.end.split('+')[0] + ''}
+						defaultValue={(() => {
+							return getDefaultValueForInputDateTimeLocal(new Date(entry.end));
+						})()}
 						required
 					/>
 				</div>
 				<div className="form-element">
-					{error && <p>Error: {error.message}</p>}
 					<label htmlFor="job_id">Job</label>
 					<select
 						name="job_id"
@@ -134,17 +144,4 @@ export async function EditWorkingEntryForm({ id }: { id: string }) {
 			</fieldset>
 		</form>
 	);
-}
-
-async function getJobs(): Promise<{
-	jobs: Job[];
-	error: PostgrestError | null;
-}> {
-	const { data: jobs, error } = await supabase.from('Jobs').select('*');
-
-	if (!jobs) {
-		throw new Error(`Couldn't load jobs data.`);
-	}
-
-	return { jobs, error };
 }

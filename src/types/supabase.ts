@@ -13,18 +13,21 @@ export interface Database {
         Row: {
           created_at: string
           id: number
+          simple_wage: number
           title: string
           user_id: number
         }
         Insert: {
           created_at?: string
           id?: number
+          simple_wage: number
           title: string
           user_id: number
         }
         Update: {
           created_at?: string
           id?: number
+          simple_wage?: number
           title?: string
           user_id?: number
         }
@@ -50,6 +53,37 @@ export interface Database {
           password?: string
         }
         Relationships: []
+      }
+      Wages: {
+        Row: {
+          amount: number
+          created_at: string
+          id: number
+          interval_type: string
+          job_id: number
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: number
+          interval_type?: string
+          job_id: number
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: number
+          interval_type?: string
+          job_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "Wages_job_id_fkey"
+            columns: ["job_id"]
+            referencedRelation: "Jobs"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       WorkingEntries: {
         Row: {
