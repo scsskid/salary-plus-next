@@ -59,9 +59,8 @@ export default async function Home() {
 					) : (
 						<ul>
 							{entries.map((entry) => (
-								<li key={entry.id}>
-									<WorkingEntriesListItem {...entry} />
-								</li>
+								// @ts-ignore
+								<WorkingEntriesListItem key={entry.id} {...entry} />
 							))}
 						</ul>
 					)}

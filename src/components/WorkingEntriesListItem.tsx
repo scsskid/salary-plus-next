@@ -7,7 +7,7 @@ import type { Tables } from '@/types/helper-types';
 type WorkingEntry = Tables<'WorkingEntries'>;
 type Job = Tables<'Jobs'>;
 
-type Props = Omit<WorkingEntry, 'created_at'> & {
+type Props = WorkingEntry & {
 	Jobs: Job;
 };
 
