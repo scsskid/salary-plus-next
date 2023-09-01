@@ -10,13 +10,13 @@ export default function Header({}: Props) {
 			<p className={styles.logo}>
 				<Link href={'/'}>Salary Plus Next</Link>
 			</p>
-			<nav hidden>
+			<nav>
 				<ol>
 					<li>
-						<Link href="/">📖 List</Link>
+						<Link href="/account/entries">📖 List</Link>
 					</li>
 					<li>
-						<Link href="/add">🆕 Add </Link>
+						<Link href="/account/entries/add">🆕 Add </Link>
 					</li>
 				</ol>
 			</nav>

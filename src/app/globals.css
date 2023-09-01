@@ -24,11 +24,6 @@ body,
 
 /* forms */
 
-form {
-	display: flex;
-	flex-direction: column;
-}
-
 form > * + * {
 	margin-top: 1rem;
 }

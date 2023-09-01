@@ -1,7 +1,8 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { supabaseBackend } from '@/lib/supabaseClient';
+import { supabase, supabaseBackend } from '@/lib/supabaseClient';
+import { redirect } from 'next/navigation';
 
 export async function createWorkingEntry(formData: FormData) {
 	const { data, error, statusText } = await supabaseBackend
@@ -26,7 +27,35 @@ export async function createWorkingEntry(formData: FormData) {
 	return { message: 'Success!' };
 }
 
-export async function deleteWorkingEntry(id: number) {
+export async function updateWorkingEntry(formData: FormData) {
+	const { data, error, statusText } = await supabaseBackend
+		.from('WorkingEntries')
+		.update({
+			begin: formData.get('begin') as string,
+			end: formData.get('end') as string,
+			/* @ts-ignore */
+			job_id: parseInt(formData.get('job_id')),
+			user_id: 1,
+			sick_leave: true,
+		})
+		// @ts-ignore
+		.eq('id', formData.get('id'));
+
+	if (error) {
+		console.error(error);
+		return { message: 'Error!' };
+	}
+
+	revalidatePath('/');
+	redirect('/');
+
+	return { message: 'Success!' };
+}
+
+export async function deleteWorkingEntry(formData: FormData) {
+	// @ts-ignore
+	const id = parseInt(formData.get('id'));
+
 	const { data, error, statusText } = await supabaseBackend
 		.from('WorkingEntries')
 		.delete()
@@ -42,7 +71,10 @@ export async function deleteWorkingEntry(id: number) {
 	return { message: 'Success!' };
 }
 
-export async function deleteJob(id: number) {
+export async function deleteJob(formData: FormData) {
+	// @ts-ignore
+	const id = parseInt(formData.get('id'));
+
 	const { data, error, statusText } = await supabaseBackend
 		.from('Jobs')
 		.delete()
