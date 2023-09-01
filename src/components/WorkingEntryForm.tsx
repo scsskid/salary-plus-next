@@ -138,7 +138,7 @@ export async function EditWorkingEntryForm({ id }: { id: string }) {
 						))}
 					</select>
 				</div>
-				<SubmitButton />
+				<SubmitButton labelPending="Updating..." />
 			</fieldset>
 		</form>
 	);

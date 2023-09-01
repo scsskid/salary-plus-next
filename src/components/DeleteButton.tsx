@@ -1,15 +1,18 @@
+'use client';
+
+import { experimental_useFormStatus as useFormStatus } from 'react-dom';
+
 type Props = {
 	id: number;
-	handler: (formData: FormData) => Promise<{
-		message: string;
-	}>;
 };
 
-export default function DeleteButton({ id, handler }: Props) {
+export default function DeleteButton({ id }: Props) {
+	const formStatus = useFormStatus();
 	return (
-		<form action={handler}>
+		<>
 			<input type="hidden" name="id" value={id} />
 			<button type="submit">Delete</button>
-		</form>
+			{formStatus.pending && <p>Deleting...</p>}
+		</>
 	);
 }

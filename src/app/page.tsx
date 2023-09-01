@@ -41,7 +41,9 @@ export default async function Home() {
 						{userJobs.map(({ id, title, simple_wage }) => (
 							<li key={id}>
 								{title} ({formatWithTwoDecimals(simple_wage)} €/h)
-								<DeleteButton id={id} handler={deleteJob} />
+								<form action={deleteJob}>
+									<DeleteButton id={id} />
+								</form>
 							</li>
 						))}
 					</ul>
@@ -84,7 +86,9 @@ export default async function Home() {
 											</li>
 										</ul>
 										<Link href={`/account/entries/${id}`}>Edit</Link>{' '}
-										<DeleteButton id={id} handler={deleteWorkingEntry} />
+										<form action={deleteWorkingEntry}>
+											<DeleteButton id={id} />
+										</form>
 									</li>
 								)
 							)}
@@ -97,3 +101,10 @@ export default async function Home() {
 		</main>
 	);
 }
+
+/* 
+
+<form action={handler}>
+		</form>
+
+*/
