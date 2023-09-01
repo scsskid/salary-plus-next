@@ -10,7 +10,8 @@ export async function getWorkingEntries() {
 	job_id,
 	Jobs (
 		id,
-		title
+		title,
+		simple_wage
 	)
 	`
 	);

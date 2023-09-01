@@ -83,8 +83,6 @@ export async function EditWorkingEntryForm({ id }: { id: string }) {
 		return <p>Couldn&apos;t load entry data.</p>;
 	}
 
-	console.log(entry);
-
 	const jobs = await getJobs();
 
 	/*  @ts-ignore */

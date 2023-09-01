@@ -7,7 +7,11 @@ import { deleteWorkingEntry, deleteJob } from '@/lib/server-actions';
 import { getWorkingEntries, getJobs } from '@/lib/dataFetchers';
 import DeleteButton from '@/components/DeleteButton';
 import { AddWorkingEntryForm } from '@/components/WorkingEntryForm';
-import { formatWithTwoDecimals, getDateDifferenceInHouse } from '@/lib/helpers';
+import {
+	calculateWage,
+	formatWithTwoDecimals,
+	getDateDifferenceInHouse,
+} from '@/lib/helpers';
 
 export const metadata: Metadata = {
 	title: 'Salary Plus Next',
@@ -49,17 +53,41 @@ export default async function Home() {
 						<p>No entries yet.</p>
 					) : (
 						<ul>
-							{/* @ts-ignore (Jobs.title can't be null) */}
-							{entries.map(({ begin, id, end, Jobs: { title: jobTitle } }) => (
-								<li key={id}>
-									{id} → {new Date(begin).toLocaleDateString('de')}{' '}
-									{new Date(begin).toLocaleTimeString('de')} -{' '}
-									{new Date(end).toLocaleTimeString('de')} ({jobTitle})
-									{getDateDifferenceInHouse(new Date(begin), new Date(end))}h
-									<Link href={`/account/entries/${id}`}>Edit</Link>{' '}
-									<DeleteButton id={id} handler={deleteWorkingEntry} />
-								</li>
-							))}
+							{entries.map(
+								({
+									begin,
+									id,
+									end,
+									/* @ts-ignore */
+									Jobs: { title: jobTitle, simple_wage },
+								}) => (
+									<li key={id}>
+										{id} → {new Date(begin).toLocaleDateString('de')}{' '}
+										{new Date(begin).toLocaleTimeString('de')} -{' '}
+										{new Date(end).toLocaleTimeString('de')} ({jobTitle})
+										<ul>
+											<li>
+												{getDateDifferenceInHouse(
+													new Date(begin),
+													new Date(end)
+												)}
+												h{' '}
+											</li>
+											<li>
+												Claimable Wage:{' '}
+												{calculateWage(
+													simple_wage,
+													new Date(begin),
+													new Date(end)
+												)}{' '}
+												€
+											</li>
+										</ul>
+										<Link href={`/account/entries/${id}`}>Edit</Link>{' '}
+										<DeleteButton id={id} handler={deleteWorkingEntry} />
+									</li>
+								)
+							)}
 						</ul>
 					)}
 
