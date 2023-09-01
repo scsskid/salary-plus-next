@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import styles from './page.module.css';
-
 import { deleteJob } from '@/lib/server-actions';
 import { getWorkingEntries, getJobs } from '@/lib/dataFetchers';
 import { formatWithTwoDecimals } from '@/lib/helpers';
@@ -29,7 +27,7 @@ export default async function Home() {
 	}
 
 	return (
-		<main className={`wrap ${styles.main}`}>
+		<main className="wrap">
 			<div className="flow">
 				<h2>Me</h2>
 				<p>foo</p>
@@ -57,10 +55,12 @@ export default async function Home() {
 					{!entries.length ? (
 						<p>No entries yet.</p>
 					) : (
-						<ul>
+						<ul className="working-entries-list">
 							{entries.map((entry) => (
-								// @ts-ignore
-								<WorkingEntriesListItem key={entry.id} {...entry} />
+								<li className="working-entries-list__item" key={entry.id}>
+									{/* @ts-ignore */}
+									<WorkingEntriesListItem {...entry} />
+								</li>
 							))}
 						</ul>
 					)}

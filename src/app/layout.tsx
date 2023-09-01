@@ -1,5 +1,5 @@
-import './reset.css';
-import './globals.css';
+import '@/css/reset.css';
+import '@/css/globals.css';
 import type { Metadata } from 'next';
 import { Fira_Sans } from 'next/font/google';
 import Header from '@/components/Header';

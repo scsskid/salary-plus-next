@@ -1,3 +1,5 @@
+@import './components/working-entries-list.css';
+
 html,
 body,
 .container {
@@ -30,4 +32,9 @@ form > * + * {
 
 label {
 	display: flex;
+}
+
+.ui-list {
+	list-style: none;
+	padding-left: 0;
 }
