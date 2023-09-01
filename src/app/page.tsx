@@ -3,15 +3,14 @@ import Link from 'next/link';
 
 import styles from './page.module.css';
 
-import { deleteWorkingEntry, deleteJob } from '@/lib/server-actions';
+import { deleteJob } from '@/lib/server-actions';
 import { getWorkingEntries, getJobs } from '@/lib/dataFetchers';
+import { formatWithTwoDecimals } from '@/lib/helpers';
+
+import { CreateJobForm } from '@/components/JobForm';
+import WorkingEntriesListItem from '@/components/WorkingEntriesListItem';
 import DeleteButton from '@/components/DeleteButton';
 import { AddWorkingEntryForm } from '@/components/WorkingEntryForm';
-import {
-	calculateWage,
-	formatWithTwoDecimals,
-	getDateDifferenceInHouse,
-} from '@/lib/helpers';
 
 export const metadata: Metadata = {
 	title: 'Salary Plus Next',
@@ -39,14 +38,18 @@ export default async function Home() {
 					<h2>Jobs</h2>
 					<ul>
 						{userJobs.map(({ id, title, simple_wage }) => (
-							<li key={id}>
-								{title} ({formatWithTwoDecimals(simple_wage)} €/h)
-								<form action={deleteJob}>
-									<DeleteButton id={id} />
-								</form>
-							</li>
+							<>
+								<li key={id}>
+									{title} ({formatWithTwoDecimals(simple_wage)} €/h){' '}
+									<Link href={`/account/jobs/${id}`}>Edit</Link>{' '}
+									<form action={deleteJob}>
+										<DeleteButton id={id} />
+									</form>
+								</li>
+							</>
 						))}
 					</ul>
+					<CreateJobForm />
 				</section>
 				<hr />
 				<section>
@@ -55,43 +58,11 @@ export default async function Home() {
 						<p>No entries yet.</p>
 					) : (
 						<ul>
-							{entries.map(
-								({
-									begin,
-									id,
-									end,
-									/* @ts-ignore */
-									Jobs: { title: jobTitle, simple_wage },
-								}) => (
-									<li key={id}>
-										{id} → {new Date(begin).toLocaleDateString('de')}{' '}
-										{new Date(begin).toLocaleTimeString('de')} -{' '}
-										{new Date(end).toLocaleTimeString('de')} ({jobTitle})
-										<ul>
-											<li>
-												{getDateDifferenceInHouse(
-													new Date(begin),
-													new Date(end)
-												)}
-												h{' '}
-											</li>
-											<li>
-												Claimable Wage:{' '}
-												{calculateWage(
-													simple_wage,
-													new Date(begin),
-													new Date(end)
-												)}{' '}
-												€
-											</li>
-										</ul>
-										<Link href={`/account/entries/${id}`}>Edit</Link>{' '}
-										<form action={deleteWorkingEntry}>
-											<DeleteButton id={id} />
-										</form>
-									</li>
-								)
-							)}
+							{entries.map((entry) => (
+								<li key={entry.id}>
+									<WorkingEntriesListItem {...entry} />
+								</li>
+							))}
 						</ul>
 					)}
 
@@ -101,10 +72,3 @@ export default async function Home() {
 		</main>
 	);
 }
-
-/* 
-
-<form action={handler}>
-		</form>
-
-*/

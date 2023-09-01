@@ -4,6 +4,9 @@ import { createWorkingEntry, updateWorkingEntry } from '@/lib/server-actions';
 import { getJobs } from '@/lib/dataFetchers';
 import { getDefaultValueForInputDateTimeLocal } from '@/lib/helpers';
 
+// TODO: Add validation
+// TODO: Add state
+
 export async function AddWorkingEntryForm() {
 	const jobs = await getJobs();
 

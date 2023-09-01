@@ -8,7 +8,9 @@ export async function getWorkingEntries() {
 	id,
 	begin,
 	end,
+	sick_leave,
 	job_id,
+	user_id,
 	Jobs (
 		id,
 		title,
