@@ -1,16 +1,17 @@
 import Link from 'next/link';
 
 import styles from './Header.module.css';
+import RevalidateButton from './RevalidateButton';
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 
 type Props = {};
 
 export default function Header({}: Props) {
 	const purge = async () => {
 		'use server';
+
 		revalidatePath('/');
-		redirect('/');
+		return;
 	};
 
 	return (
@@ -27,9 +28,7 @@ export default function Header({}: Props) {
 						<Link href="/account/entries/add">Add Entry</Link>
 					</li>
 					<li style={{ marginLeft: 'auto' }}>
-						<form action={purge}>
-							<button type="submit">Try manual revalidate</button>
-						</form>
+						<RevalidateButton formHandler={purge} />
 					</li>
 				</ol>
 			</nav>
