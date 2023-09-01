@@ -5,8 +5,6 @@ import styles from './Header.module.css';
 type Props = {};
 
 export default function Header({}: Props) {
-	console.log(styles);
-
 	return (
 		<header className={`wrap ${styles.header}`}>
 			<p className={styles.logo}>

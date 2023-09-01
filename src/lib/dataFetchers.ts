@@ -2,6 +2,7 @@ import { supabase } from './supabaseClient';
 
 // Non Form Actions (e.g. get data)
 export async function getWorkingEntries() {
+	// Todo: Authenticated User
 	const { data: entries } = await supabase.from('WorkingEntries').select(
 		`
 	id,
