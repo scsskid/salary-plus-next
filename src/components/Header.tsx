@@ -25,7 +25,7 @@ export default function Header({}: Props) {
 						<Link href="/">Home</Link>
 					</li>
 					<li>
-						<Link href="/account/entries/new">Add Entry</Link>
+						<Link href="/account/entries/new">New Entry</Link>
 					</li>
 					<li>
 						<Link href="/account">Account</Link>

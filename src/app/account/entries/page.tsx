@@ -14,10 +14,12 @@ export default async function AccountEntriesPage({}: Props) {
 		<>
 			<h1>AccountEntriesPage</h1>
 			<Link href="/account/entries/new">New Entry</Link>
-			<ul>
+			<ul className="working-entries-list">
 				{entries.map((entry) => (
-					// @ts-ignore
-					<WorkingEntriesListItem key={entry.id} {...entry} />
+					<li key={entry.id} className="working-entries-list__item">
+						{/* @ts-ignore */}
+						<WorkingEntriesListItem {...entry} />
+					</li>
 				))}
 			</ul>
 		</>
