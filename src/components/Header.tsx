@@ -22,10 +22,13 @@ export default function Header({}: Props) {
 			<nav className={styles['main-navigation']}>
 				<ol>
 					<li>
-						<Link href="/account/entries">List Entries</Link>
+						<Link href="/">Home</Link>
 					</li>
 					<li>
-						<Link href="/account/entries/add">Add Entry</Link>
+						<Link href="/account/entries/new">Add Entry</Link>
+					</li>
+					<li>
+						<Link href="/account">Account</Link>
 					</li>
 					<li style={{ marginLeft: 'auto' }}>
 						<RevalidateButton formHandler={purge} />

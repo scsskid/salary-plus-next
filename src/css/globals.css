@@ -38,3 +38,9 @@ label {
 	list-style: none;
 	padding-left: 0;
 }
+
+/* Typography */
+
+h1 {
+	font-size: 1.5rem;
+}
