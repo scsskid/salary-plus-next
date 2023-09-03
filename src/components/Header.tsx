@@ -30,6 +30,9 @@ export default function Header({}: Props) {
 					<li>
 						<Link href="/account">Account</Link>
 					</li>
+					<li>
+						<Link href="/dev">Dev</Link>
+					</li>
 					<li style={{ marginLeft: 'auto' }}>
 						<RevalidateButton formHandler={purge} />
 					</li>

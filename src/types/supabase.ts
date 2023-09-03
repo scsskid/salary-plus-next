@@ -12,6 +12,7 @@ export interface Database {
       Jobs: {
         Row: {
           created_at: string
+          day_hours: number | null
           id: number
           simple_wage: number
           title: string
@@ -19,6 +20,7 @@ export interface Database {
         }
         Insert: {
           created_at?: string
+          day_hours?: number | null
           id?: number
           simple_wage: number
           title: string
@@ -26,6 +28,7 @@ export interface Database {
         }
         Update: {
           created_at?: string
+          day_hours?: number | null
           id?: number
           simple_wage?: number
           title?: string

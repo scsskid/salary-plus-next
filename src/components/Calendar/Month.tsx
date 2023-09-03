@@ -48,7 +48,7 @@ export default function Month({
 	return weeks;
 }
 
-export function getWeekStartDate(dateObj, firstDayOfWeekIndex = 1) {
+export function getWeekStartDate(dateObj: Date, firstDayOfWeekIndex = 1) {
 	const dayOfWeek = dateObj.getDay();
 	const firstDayOfWeek = new Date(dateObj);
 	const diff =

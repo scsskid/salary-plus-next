@@ -20,9 +20,9 @@ export default async function Home() {
 				<h2>Calendar</h2>
 				<Calendar entries={entries} />
 			</section>
-			<section>
+			{/* <section>
 				<AccountEntriesPage />
-			</section>
+			</section> */}
 		</div>
 	);
 }

@@ -1,3 +1,5 @@
+import { sampleData } from './data';
+
 export function formatWithTwoDecimals(num: number) {
 	return (Math.round(num * 100) / 100).toFixed(2);
 }
@@ -35,4 +37,45 @@ export function filterEntriesByDate(entries, date) {
 	return entries.filter((entry) => {
 		return isSameDay(new Date(entry.begin), date);
 	});
+}
+
+export const updatedSampleJobs = sampleData.jobs.map((entry) => {
+	return {
+		id: entry.id,
+		title: entry.name,
+		simple_wage: entry.rate,
+		user_id: 1,
+		day_hours: entry.dayHours,
+	};
+});
+
+export const updatedSampleDataRecords = shiftRecordsDates({
+	records: sampleData.records,
+	summand: 44,
+}).map((entry) => {
+	return {
+		begin: entry.begin,
+		end: entry.end,
+		sick_leave: entry.sickLeave ? true : false,
+		user_id: 1,
+		job_id: entry.jobId,
+	};
+});
+
+export function shiftRecordsDates({ records = [], summand = 0 }) {
+	const shiftMonths = (record) => {
+		const beginCopy = new Date(record.begin);
+		const endCopy = new Date(record.end);
+
+		beginCopy.setMonth(beginCopy.getMonth() + summand);
+		endCopy.setMonth(endCopy.getMonth() + summand);
+
+		return {
+			...record,
+			begin: beginCopy.toISOString(),
+			end: endCopy.toISOString(),
+		};
+	};
+
+	return records.map(shiftMonths);
 }
