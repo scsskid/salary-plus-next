@@ -51,7 +51,7 @@ export const updatedSampleJobs = sampleData.jobs.map((entry) => {
 
 export const updatedSampleDataRecords = shiftRecordsDates({
 	records: sampleData.records,
-	summand: 44,
+	summand: 40,
 }).map((entry) => {
 	return {
 		begin: entry.begin,

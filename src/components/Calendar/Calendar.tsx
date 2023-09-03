@@ -15,6 +15,34 @@ export default function Calendar({ entries }: WorkingEntriesList) {
 	return (
 		<>
 			<div className="calendar-body">
+				<nav>
+					<button
+						onClick={() => {
+							setInputDate(
+								new Date(inputDate.getFullYear(), inputDate.getMonth() - 1, 1)
+							);
+						}}
+					>
+						Previous Month
+					</button>
+					<button
+						onClick={() => {
+							setInputDate(
+								new Date(inputDate.getFullYear(), inputDate.getMonth() + 1, 1)
+							);
+						}}
+					>
+						Next Month
+					</button>
+
+					<button
+						onClick={() => {
+							setInputDate(new Date());
+						}}
+					>
+						Today
+					</button>
+				</nav>
 				<p>
 					{inputDate.toLocaleDateString('default', { month: 'long' })}{' '}
 					{inputDate.getFullYear()}
