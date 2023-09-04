@@ -2,10 +2,10 @@
 
 import InputDateNav from '../InputDateNav';
 import ReportBody from './ReportBody';
-import { WorkingEntry, Job } from '@/types/entries';
+import { Job, WorkingEntryWithJob } from '@/types/entries';
 
 export type Props = {
-	entries: WorkingEntry & { Jobs: Job }[];
+	entries: WorkingEntryWithJob[];
 	jobs: Job[];
 };
 

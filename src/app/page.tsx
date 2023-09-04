@@ -19,6 +19,7 @@ export default async function Home() {
 			<section>
 				<h2>Calendar</h2>
 				<InputDateProviderWrapper>
+					{/* @ts-ignore  */}
 					<Calendar entries={entries} />
 				</InputDateProviderWrapper>
 			</section>

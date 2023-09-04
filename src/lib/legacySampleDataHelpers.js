@@ -1,5 +1,7 @@
 /* @ts-ignore */
 
+import { sampleData } from './data';
+
 export const updatedSampleDataRecords = shiftRecordsDates({
 	records: sampleData.records,
 	summand: 40,

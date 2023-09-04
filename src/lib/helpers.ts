@@ -1,5 +1,4 @@
 import { WorkingEntry } from '@/types/entries';
-import { sampleData } from './data';
 
 export function formatWithTwoDecimals(num: number) {
 	return (Math.round(num * 100) / 100).toFixed(2);

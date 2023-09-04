@@ -13,6 +13,7 @@ export default function CalendarBody({
 }) {
 	const { inputDate } = useInputDate();
 
+	/* @ts-ignore  */
 	const entiresOfDay = filterEntriesByBegin(entries, inputDate, isSameDay);
 
 	return (
@@ -22,6 +23,7 @@ export default function CalendarBody({
 			<Month
 				startDate={(() => getMonthStartDate(inputDate))()}
 				handleDateClick={() => console.log('no handler defined')}
+				// @ts-ignore
 				entries={entries}
 			/>
 			{entiresOfDay.length > 0 && (
@@ -32,6 +34,7 @@ export default function CalendarBody({
 							<li key={entry.id}>
 								<>
 									<pre hidden>{JSON.stringify(entry, null, 2)}</pre>
+									{/* @ts-ignore  */}
 									<WorkingEntriesListItem {...entry} />
 								</>
 							</li>
@@ -43,7 +46,7 @@ export default function CalendarBody({
 	);
 }
 
-export function getMonthStartDate(input) {
+export function getMonthStartDate(input: string | Date) {
 	const dt = new Date(input);
 	dt.setHours(0, 0, 0, 0);
 	return new Date(dt.setDate(1));

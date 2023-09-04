@@ -1,36 +1,24 @@
+/* @ts-ignore */
+
 import {
 	filterEntriesByBegin,
 	isSameMonth,
 	getDateDifferenceInHouse,
 } from '@/lib/helpers';
 import { useInputDate } from '@/lib/hooks/useInputDateContext';
-import { WorkingEntry, Job } from '@/types/entries';
-import { Props } from './Report';
+import { WorkingEntryWithJob } from '@/types/entries';
+import { Props as ReportProps } from './Report';
 
-export default function ReportBody({ entries, jobs }: Props) {
+export default function ReportBody({ entries, jobs }: ReportProps) {
 	const { inputDate } = useInputDate();
+
 	const entriesOfMonth = filterEntriesByBegin(entries, inputDate, isSameMonth);
-
-	function getTotalHoursWorkedByJob(
-		entriesOfMonth: WorkingEntry[],
-		jobId: number
-	) {
-		return entriesOfMonth.reduce((acc, entry) => {
-			const { begin, end, job_id } = entry;
-
-			if (job_id !== jobId) {
-				return acc;
-			}
-
-			const hours = getDateDifferenceInHouse(new Date(begin), new Date(end));
-			return acc + hours;
-		}, 0);
-	}
 
 	function getTotals(jobs: []) {
 		return jobs.reduce(
 			(acc, job) => {
 				const { id, simple_wage } = job;
+				// @ts-ignore
 				const hours = getTotalHoursWorkedByJob(entriesOfMonth, id);
 				return {
 					hours: acc.hours + hours,
@@ -44,6 +32,7 @@ export default function ReportBody({ entries, jobs }: Props) {
 	function getReport() {
 		return jobs.map((job) => {
 			const { id, simple_wage } = job;
+			// @ts-ignore
 			const hours = getTotalHoursWorkedByJob(entriesOfMonth, id);
 
 			return {
@@ -57,6 +46,7 @@ export default function ReportBody({ entries, jobs }: Props) {
 	return (
 		<div>
 			<h3>Total</h3>
+			{/* @ts-ignore  */}
 			<p>Hous Worked: {getTotals(jobs).hours} h</p>
 
 			<h3>By Job</h3>
@@ -69,4 +59,20 @@ export default function ReportBody({ entries, jobs }: Props) {
 			))}
 		</div>
 	);
+}
+
+function getTotalHoursWorkedByJob(
+	entriesOfMonth: WorkingEntryWithJob[],
+	jobId: number
+) {
+	return entriesOfMonth.reduce((acc, entry) => {
+		const { begin, end, job_id } = entry;
+
+		if (job_id !== jobId) {
+			return acc;
+		}
+
+		const hours = getDateDifferenceInHouse(new Date(begin), new Date(end));
+		return acc + hours;
+	}, 0);
 }

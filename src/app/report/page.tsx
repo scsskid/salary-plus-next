@@ -2,6 +2,7 @@ import InputDateNav from '@/components/InputDateNav';
 import InputDateProviderWrapper from '@/components/InputDateProviderWrapper';
 import Report from '@/components/Report/Report';
 import { getJobs, getWorkingEntries } from '@/lib/dataFetchers';
+import { WorkingEntry } from '@/types/entries';
 
 export default async function ReportPage() {
 	const entries = await getWorkingEntries();
@@ -19,6 +20,7 @@ export default async function ReportPage() {
 		<>
 			<h1>ReportPage</h1>
 			<InputDateProviderWrapper>
+				{/* @ts-ignore */}
 				<Report entries={entries} jobs={jobs} />
 			</InputDateProviderWrapper>
 		</>
