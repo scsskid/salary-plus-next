@@ -46,12 +46,6 @@ export function filterEntriesByBegin(entries, date, cb) {
 	});
 }
 
-// export function getEntriesByMonth({ entries = [], inputDate = new Date() }) {
-// 	return entries.filter((entry) => {
-// 		return isSameMonth(new Date(entry.begin), inputDate);
-// 	});
-// }
-
 export const updatedSampleJobs = sampleData.jobs.map((entry) => {
 	return {
 		id: entry.id,

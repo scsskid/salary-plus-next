@@ -1,4 +1,4 @@
-import { WorkingEntriesList } from '@/types/entries';
+import { WorkingEntryWithJob } from '@/types/entries';
 import Month from './Month';
 import Weekdays from './Weekdays';
 import WorkingEntriesListItem from '../WorkingEntriesListItem';
@@ -6,8 +6,12 @@ import { filterEntriesByBegin, isSameDay } from '@/lib/helpers';
 import { useInputDate } from '@/lib/hooks/useInputDateContext';
 import InputDateNav from '../InputDateNav';
 
-export default function CalendarBody({ entries }: WorkingEntriesList) {
-	const { inputDate, setInputDate } = useInputDate();
+export default function CalendarBody({
+	entries,
+}: {
+	entries: WorkingEntryWithJob[];
+}) {
+	const { inputDate } = useInputDate();
 
 	const entiresOfDay = filterEntriesByBegin(entries, inputDate, isSameDay);
 
