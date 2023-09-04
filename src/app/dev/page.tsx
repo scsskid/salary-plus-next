@@ -30,8 +30,6 @@ export async function deleteAllJobs() {
 		.delete()
 		.neq('id', '0');
 
-	console.log({ data, statusText, error });
-
 	if (error) {
 		console.error(error);
 		return;
@@ -44,8 +42,6 @@ export async function insertSampleJobs() {
 	const { data, error, statusText } = await supabaseBackend
 		.from('Jobs')
 		.insert(updatedSampleJobs);
-
-	console.log({ data, statusText, error });
 
 	if (error) {
 		console.error(error);
@@ -60,8 +56,6 @@ export async function insertSampleEntries() {
 		.from('WorkingEntries')
 		.insert(updatedSampleDataRecords)
 		.select();
-
-	console.log({ data, statusText, error });
 
 	if (error) {
 		console.error(error);
