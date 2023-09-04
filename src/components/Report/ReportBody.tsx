@@ -27,29 +27,44 @@ export default function ReportBody({ entries, jobs }: Props) {
 		}, 0);
 	}
 
-	function getTotalHoursWorked(jobs: []) {
-		return jobs.reduce((acc, job) => {
-			const { id } = job;
-			const hours = getTotalHoursWorkedByJob(entriesOfMonth, id);
-			return acc + hours;
-		}, 0);
+	function getTotals(jobs: []) {
+		return jobs.reduce(
+			(acc, job) => {
+				const { id, simple_wage } = job;
+				const hours = getTotalHoursWorkedByJob(entriesOfMonth, id);
+				return {
+					hours: acc.hours + hours,
+					wage: acc.wage + hours * simple_wage,
+				};
+			},
+			{ hours: 0, wage: 0 }
+		);
 	}
 
-	console.log('hoursByJob', getTotalHoursWorkedByJob(entriesOfMonth, 1));
-	console.log('hoursByJob', getTotalHoursWorkedByJob(entriesOfMonth, 2));
-	console.log('hoursByJob', getTotalHoursWorkedByJob(entriesOfMonth, 3));
-	console.log('total', getTotalHoursWorked(jobs));
+	function getReport() {
+		return jobs.map((job) => {
+			const { id, simple_wage } = job;
+			const hours = getTotalHoursWorkedByJob(entriesOfMonth, id);
+
+			return {
+				id,
+				hours,
+				wage: hours * simple_wage,
+			};
+		});
+	}
 
 	return (
 		<div>
 			<h3>Total</h3>
-			<p>Hous Worked: {getTotalHoursWorked(jobs)}</p>
+			<p>Hous Worked: {getTotals(jobs).hours} h</p>
 
 			<h3>By Job</h3>
 			{jobs.map((job) => (
 				<div key={job.id}>
 					<p>{job.title}</p>
-					<p>{getTotalHoursWorkedByJob(entriesOfMonth, job.id)}</p>
+					<p>{getReport().find((el) => el.id === job.id)?.hours} h</p>
+					<p>{getReport().find((el) => el.id === job.id)?.wage} €</p>
 				</div>
 			))}
 		</div>
