@@ -1,19 +1,23 @@
 'use client';
 
-import { InputDateProvider } from '@/lib/hooks/useInputDateContext';
 import InputDateNav from '../InputDateNav';
 import ReportBody from './ReportBody';
 import { WorkingEntriesList } from '@/types/entries';
 
-export default function Report({ entries }: WorkingEntriesList) {
+export type Props = {
+	entries: WorkingEntriesList;
+	jobs: [];
+};
+
+export default function Report({ entries, jobs }: Props) {
 	if (!entries) {
 		return <div>could not load entries...</div>;
 	}
 
 	return (
-		<InputDateProvider>
+		<>
 			<InputDateNav />
-			<ReportBody entries={entries} />
-		</InputDateProvider>
+			<ReportBody entries={entries} jobs={jobs} />
+		</>
 	);
 }

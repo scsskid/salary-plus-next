@@ -3,8 +3,7 @@
 import { updatedSampleDataRecords, updatedSampleJobs } from '@/lib/helpers';
 import { supabaseBackend } from '@/lib/supabaseClient';
 
-type Props = {};
-export default async function DevPage({}: Props) {
+export default async function DevPage() {
 	return (
 		<>
 			<h1>DevPage</h1>
