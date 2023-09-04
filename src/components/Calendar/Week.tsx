@@ -1,15 +1,14 @@
 import { filterEntriesByDate, isSameDay } from '@/lib/helpers';
+import { useInputDate } from '@/lib/hooks/useInputDateContext';
 
 export default function Week({
 	startDate = new Date('1982/10/04'),
 	entries = [],
-	inputDate = new Date(),
 	jobs,
 	handleDateClick = () => {
 		console.warn('no handler for dateClick');
 	},
 	requestedMonthIndex,
-	setInputDate = () => {},
 	bleedMonth = false,
 }) {
 	const endDate = new Date(startDate).setDate(startDate.getDate() + 7);
@@ -34,8 +33,6 @@ export default function Week({
 					entries={entries}
 					jobs={jobs}
 					isBleedDate={isBleedDate}
-					inputDate={inputDate}
-					setInputDate={setInputDate}
 				/>
 			);
 		}
@@ -49,12 +46,11 @@ function DateCell({
 	jobs = [],
 	entries = [],
 	isBleedDate = false,
-	inputDate,
-	setInputDate = () => {
-		console.warn('no setInputDate handler defined');
-	},
 }) {
 	/* filter entries.begin if it matches date */
+
+	const { inputDate, setInputDate } = useInputDate();
+
 	const inputDateIsDate = isSameDay(inputDate, date);
 	const dateRecords = filterEntriesByDate(entries, date);
 

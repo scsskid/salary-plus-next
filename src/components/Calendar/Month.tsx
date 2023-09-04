@@ -7,9 +7,7 @@ export default function Month({
 		console.warn('no handler defined');
 	},
 	jobs = [],
-	inputDate = new Date(),
 	entries = [],
-	setInputDate = () => {},
 }) {
 	const weeks = [];
 	const requestedMonthIndex = startDate.getMonth();
@@ -38,9 +36,7 @@ export default function Month({
 				jobs={jobs}
 				requestedMonthIndex={requestedMonthIndex}
 				bleedMonth={false}
-				inputDate={inputDate}
 				entries={entries}
-				setInputDate={setInputDate}
 			/>
 		);
 	}

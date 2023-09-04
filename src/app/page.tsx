@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Calendar from '@/components/Calendar/Calendar';
-import AccountEntriesPage from './account/entries/page';
 import { getWorkingEntries } from '@/lib/dataFetchers';
 
 export const metadata: Metadata = {
@@ -20,9 +19,6 @@ export default async function Home() {
 				<h2>Calendar</h2>
 				<Calendar entries={entries} />
 			</section>
-			{/* <section>
-				<AccountEntriesPage />
-			</section> */}
 		</div>
 	);
 }
