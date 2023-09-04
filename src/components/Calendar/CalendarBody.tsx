@@ -1,4 +1,4 @@
-import { WorkingEntryWithJob } from '@/types/entries';
+import { WorkingEntry, Job } from '@/types/entries';
 import Month from './Month';
 import Weekdays from './Weekdays';
 import WorkingEntriesListItem from '../WorkingEntriesListItem';
@@ -9,7 +9,7 @@ import InputDateNav from '../InputDateNav';
 export default function CalendarBody({
 	entries,
 }: {
-	entries: WorkingEntryWithJob[];
+	entries: WorkingEntry & { Jobs: Job }[];
 }) {
 	const { inputDate } = useInputDate();
 

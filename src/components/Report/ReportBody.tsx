@@ -4,7 +4,7 @@ import {
 	getDateDifferenceInHouse,
 } from '@/lib/helpers';
 import { useInputDate } from '@/lib/hooks/useInputDateContext';
-import { WorkingEntryWithJob } from '@/types/entries';
+import { WorkingEntry, Job } from '@/types/entries';
 import { Props } from './Report';
 
 export default function ReportBody({ entries, jobs }: Props) {
@@ -12,7 +12,7 @@ export default function ReportBody({ entries, jobs }: Props) {
 	const entriesOfMonth = filterEntriesByBegin(entries, inputDate, isSameMonth);
 
 	function getTotalHoursWorkedByJob(
-		entriesOfMonth: WorkingEntryWithJob[],
+		entriesOfMonth: WorkingEntry[],
 		jobId: number
 	) {
 		return entriesOfMonth.reduce((acc, entry) => {
