@@ -1,4 +1,8 @@
-import { filterEntriesByDate, isSameDay } from '@/lib/helpers';
+import {
+	filterEntriesByBegin,
+	filterEntriesByDate,
+	isSameDay,
+} from '@/lib/helpers';
 import { useInputDate } from '@/lib/hooks/useInputDateContext';
 
 export default function Week({
@@ -52,7 +56,7 @@ function DateCell({
 	const { inputDate, setInputDate } = useInputDate();
 
 	const inputDateIsDate = isSameDay(inputDate, date);
-	const dateRecords = filterEntriesByDate(entries, date);
+	const entiresOfDay = filterEntriesByBegin(entries, date, isSameDay);
 
 	const day = date
 		.toLocaleDateString('en-US', { weekday: 'short' })
@@ -77,9 +81,9 @@ function DateCell({
 				<div className="calendar-date-button-figure">
 					<span>{date.getDate()}</span>
 				</div>
-				{dateRecords.length > 0 && (
+				{entiresOfDay.length > 0 && (
 					<div data-records>
-						{dateRecords.map((record, i) => (
+						{entiresOfDay.map((record, i) => (
 							<DateCellEventIndicator key={i} record={record} jobs={jobs} />
 						))}
 					</div>

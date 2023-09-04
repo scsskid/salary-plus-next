@@ -33,11 +33,24 @@ export function isSameDay(date1: Date, date2: Date) {
 	);
 }
 
-export function filterEntriesByDate(entries, date) {
+export function isSameMonth(date1: Date, date2: Date) {
+	return (
+		date1.getMonth() === date2.getMonth() &&
+		date1.getFullYear() === date2.getFullYear()
+	);
+}
+
+export function filterEntriesByBegin(entries, date, cb) {
 	return entries.filter((entry) => {
-		return isSameDay(new Date(entry.begin), date);
+		return cb(new Date(entry.begin), date);
 	});
 }
+
+// export function getEntriesByMonth({ entries = [], inputDate = new Date() }) {
+// 	return entries.filter((entry) => {
+// 		return isSameMonth(new Date(entry.begin), inputDate);
+// 	});
+// }
 
 export const updatedSampleJobs = sampleData.jobs.map((entry) => {
 	return {

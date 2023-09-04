@@ -22,10 +22,10 @@ export default function Header({}: Props) {
 			<nav className={styles['main-navigation']}>
 				<ol>
 					<li>
-						<Link href="/">Home</Link>
+						<Link href="/">Calendar</Link>
 					</li>
 					<li>
-						<Link href="/account/entries/new">New Entry</Link>
+						<Link href="/report">Report</Link>
 					</li>
 					<li>
 						<Link href="/account">Account</Link>
