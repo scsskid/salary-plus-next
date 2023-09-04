@@ -1,3 +1,4 @@
+import { WorkingEntry } from '@/types/entries';
 import { sampleData } from './data';
 
 export function formatWithTwoDecimals(num: number) {
@@ -40,49 +41,12 @@ export function isSameMonth(date1: Date, date2: Date) {
 	);
 }
 
-export function filterEntriesByBegin(entries, date, cb) {
+export function filterEntriesByBegin(
+	entries: WorkingEntry[],
+	date: Date,
+	callback: (date1: Date, date2: Date) => boolean
+) {
 	return entries.filter((entry) => {
-		return cb(new Date(entry.begin), date);
+		return callback(new Date(entry.begin), date);
 	});
-}
-
-export const updatedSampleJobs = sampleData.jobs.map((entry) => {
-	return {
-		id: entry.id,
-		title: entry.name,
-		simple_wage: entry.rate,
-		user_id: 1,
-		day_hours: entry.dayHours,
-	};
-});
-
-export const updatedSampleDataRecords = shiftRecordsDates({
-	records: sampleData.records,
-	summand: 40,
-}).map((entry) => {
-	return {
-		begin: entry.begin,
-		end: entry.end,
-		sick_leave: entry.sickLeave ? true : false,
-		user_id: 1,
-		job_id: entry.jobId,
-	};
-});
-
-export function shiftRecordsDates({ records = [], summand = 0 }) {
-	const shiftMonths = (record) => {
-		const beginCopy = new Date(record.begin);
-		const endCopy = new Date(record.end);
-
-		beginCopy.setMonth(beginCopy.getMonth() + summand);
-		endCopy.setMonth(endCopy.getMonth() + summand);
-
-		return {
-			...record,
-			begin: beginCopy.toISOString(),
-			end: endCopy.toISOString(),
-		};
-	};
-
-	return records.map(shiftMonths);
 }

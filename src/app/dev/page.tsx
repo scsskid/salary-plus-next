@@ -1,6 +1,9 @@
 'use server';
 
-import { updatedSampleDataRecords, updatedSampleJobs } from '@/lib/helpers';
+import {
+	updatedSampleDataRecords,
+	updatedSampleJobs,
+} from '@/lib/legacySampleDataHelpers';
 import { supabaseBackend } from '@/lib/supabaseClient';
 
 export default async function DevPage() {
@@ -22,7 +25,7 @@ export default async function DevPage() {
 	);
 }
 
-export async function deleteAllJobs() {
+async function deleteAllJobs() {
 	'use server';
 
 	const { data, error, statusText } = await supabaseBackend
@@ -36,7 +39,7 @@ export async function deleteAllJobs() {
 	}
 }
 
-export async function insertSampleJobs() {
+async function insertSampleJobs() {
 	'use server';
 
 	const { data, error, statusText } = await supabaseBackend
@@ -49,7 +52,7 @@ export async function insertSampleJobs() {
 	}
 }
 
-export async function insertSampleEntries() {
+async function insertSampleEntries() {
 	'use server';
 
 	const { data, error, statusText } = await supabaseBackend
