@@ -3,10 +3,6 @@ import Calendar from '@/components/Calendar/Calendar';
 import { getWorkingEntries } from '@/lib/dataFetchers';
 import InputDateProviderWrapper from '@/components/InputDateProviderWrapper';
 
-export const metadata: Metadata = {
-	title: 'Salary Plus Next',
-};
-
 export default async function Home() {
 	const entries = await getWorkingEntries();
 
