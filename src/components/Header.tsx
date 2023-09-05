@@ -3,11 +3,11 @@ import styles from './Header.module.css';
 
 export default function Header() {
 	return (
-		<header className={`wrap ${styles.header}`}>
-			<p className={styles.logo}>
+		<header className="wrap site-header">
+			<p className="logo">
 				<Link href={'/'}>Salary Plus Next</Link>
 			</p>
-			<nav className={styles['main-navigation']}>
+			<nav className="main-navigation">
 				<ol>
 					<li>
 						<Link href="/">Calendar</Link>

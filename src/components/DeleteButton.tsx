@@ -11,7 +11,9 @@ export default function DeleteButton({ id }: Props) {
 	return (
 		<>
 			<input type="hidden" name="id" value={id} />
-			<button type="submit">Delete</button>
+			<button className="ui-btn" type="submit">
+				Delete
+			</button>
 			{formStatus.pending && <p>Deleting...</p>}
 		</>
 	);

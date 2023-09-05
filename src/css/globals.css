@@ -1,5 +1,13 @@
-@import './components/working-entries-list.css';
+@import './components/WorkingEntriesList.css';
 @import './components/Calendar.css';
+@import './components/SiteHeader.css';
+@import './components/SiteFooter.css';
+
+/* Variables */
+
+:root {
+	--color-base: rebeccapurple;
+}
 
 html,
 body,
@@ -17,12 +25,12 @@ body,
 .container {
 }
 
-.flow > * + * {
-	margin-top: 1rem;
-}
-
 .wrap {
 	padding: 1rem;
+}
+
+a {
+	color: var(--color-base);
 }
 
 /* forms */
@@ -40,8 +48,18 @@ label {
 	padding-left: 0;
 }
 
-/* Typography */
+/* Buttons */
 
-h1 {
-	font-size: 1.5rem;
+.ui-btn {
+	border: 2px solid var(--color-base);
+	padding: 0.25rem 0.75rem;
+	color: var(--color-base);
+	font-weight: bold;
+	border-radius: 3px;
+	text-decoration: none;
+
+	&:hover {
+		background-color: var(--color-base);
+		color: #fff;
+	}
 }

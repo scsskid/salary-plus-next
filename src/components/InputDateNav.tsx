@@ -1,13 +1,16 @@
 import { useInputDate } from '@/lib/hooks/useInputDateContext';
 
+import '@/css/components/InputDateNav.css';
+
 type Props = {};
 export default function InputDateNav({}: Props) {
 	const { inputDate, setInputDate } = useInputDate();
 
 	return (
-		<div className="input-date-nav">
-			<nav>
+		<div>
+			<nav className="input-date-nav">
 				<button
+					className="ui-btn"
 					onClick={() => {
 						setInputDate(
 							new Date(inputDate.getFullYear(), inputDate.getMonth() - 1, 1)
@@ -17,6 +20,7 @@ export default function InputDateNav({}: Props) {
 					Previous Month
 				</button>
 				<button
+					className="ui-btn"
 					onClick={() => {
 						setInputDate(
 							new Date(inputDate.getFullYear(), inputDate.getMonth() + 1, 1)
@@ -27,6 +31,7 @@ export default function InputDateNav({}: Props) {
 				</button>
 
 				<button
+					className="ui-btn"
 					onClick={() => {
 						setInputDate(new Date());
 					}}

@@ -9,7 +9,7 @@ export default function SubmitButton({
 	return (
 		<>
 			<p>pending: {pending.toString()}</p>
-			<button type="submit" disabled={pending}>
+			<button className="ui-btn" type="submit" disabled={pending}>
 				{pending ? labelPending : label}
 			</button>
 		</>

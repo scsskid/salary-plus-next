@@ -8,6 +8,7 @@
 	margin-bottom: var(--b);
 	transition: height 0.2s;
 	overflow: hidden;
+	padding: 1rem 0;
 }
 
 .calendar-weekdays,
@@ -25,8 +26,7 @@
 }
 
 .calendar-date:not(.calendar-date--empty) {
-	--color: hsl(var(--hue-main) 20% 80%);
-	box-shadow: inset 0 -1px 0 0px var(--color);
+	box-shadow: inset 0 -1px 0 0px var(--color-base);
 }
 
 .calendar-date-button {
@@ -62,14 +62,7 @@
 [data-today='today'] .calendar-date-button-figure {
 	color: var(--color-highlight);
 	font-weight: bold;
-
-	& span {
-		/* background: var(--color-highlight); */
-	}
 }
-
-/* [data-selected='selected']:not([data-today='today'])
-  .calendar-date-button-figure { */
 
 [data-selected='selected'] .calendar-date-button-figure {
 	--color: hsl(var(--hue-accent) 50% 40%);

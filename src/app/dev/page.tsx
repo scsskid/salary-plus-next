@@ -11,15 +11,21 @@ export default async function DevPage() {
 		<>
 			<h1>DevPage</h1>
 			<form action={deleteAllJobs}>
-				<button type="submit">Delete all Jobs</button>
+				<button className="ui-btn" type="submit">
+					Delete all Jobs
+				</button>
 			</form>
 
 			<form action={insertSampleJobs}>
-				<button type="submit">Insert Sample Jobs</button>
+				<button className="ui-btn" type="submit">
+					Insert Sample Jobs
+				</button>
 			</form>
 
 			<form action={insertSampleEntries}>
-				<button type="submit">Insert Sample Entries</button>
+				<button className="ui-btn" type="submit">
+					Insert Sample Entries
+				</button>
 			</form>
 		</>
 	);

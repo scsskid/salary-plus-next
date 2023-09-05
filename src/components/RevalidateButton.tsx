@@ -5,7 +5,9 @@ export default function RevalidateButton({
 }) {
 	return (
 		<form action={formHandler}>
-			<button type="submit">Try manual revalidate</button>
+			<button className="ui-btn" type="submit">
+				Try manual revalidate
+			</button>
 		</form>
 	);
 }

@@ -43,7 +43,9 @@ export default function WorkingEntriesListItem(item: Props) {
 				<li>{getDateDifferenceInHouse(new Date(begin), new Date(end))}h </li>
 				<li>{calculateWage(simple_wage, new Date(begin), new Date(end))} €</li>
 			</ul>
-			<Link href={`/account/entries/${id}`}>Edit</Link>{' '}
+			<Link className="ui-btn" href={`/account/entries/${id}`}>
+				Edit
+			</Link>{' '}
 			<form action={deleteWorkingEntry}>
 				<DeleteButton id={id} />
 			</form>

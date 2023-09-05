@@ -1,9 +1,7 @@
 import { revalidatePath } from 'next/cache';
-import styles from './Footer.module.css';
 import RevalidateButton from './RevalidateButton';
 
-type Props = {};
-export default function Footer({}: Props) {
+export default function Footer() {
 	const purge = async () => {
 		'use server';
 
@@ -12,7 +10,7 @@ export default function Footer({}: Props) {
 	};
 
 	return (
-		<footer className={`wrap ${styles.footer}`}>
+		<footer className="wrap site-footer">
 			&copy; {new Date().getFullYear()}
 			<RevalidateButton formHandler={purge} />
 		</footer>

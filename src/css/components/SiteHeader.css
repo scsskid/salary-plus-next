@@ -1,9 +1,13 @@
-.header {
-	background-color: aliceblue;
+.site-header {
+	border-bottom: 2px solid var(--color-base);
 }
 
 .logo {
 	font-weight: bold;
+}
+
+.logo a {
+	text-decoration: none;
 }
 
 .main-navigation > ol {
