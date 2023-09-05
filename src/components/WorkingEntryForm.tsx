@@ -1,7 +1,7 @@
 import SubmitButton from './SubmitButton';
 import { supabase } from '@/lib/supabaseClient';
 import { createWorkingEntry, updateWorkingEntry } from '@/lib/server-actions';
-import { getJobs } from '@/lib/dataFetchers';
+import { getJobs, getSingleEntry } from '@/lib/dataFetchers';
 import { getDefaultValueForInputDateTimeLocal } from '@/lib/helpers';
 
 // TODO: Add validation
@@ -64,23 +64,7 @@ export async function AddWorkingEntryForm() {
 }
 
 export async function EditWorkingEntryForm({ id }: { id: string }) {
-	const { data: entry } = await supabase
-		.from('WorkingEntries')
-		.select(
-			`
-			id,
-			begin,
-			end,
-			job_id,
-	Jobs (
-		id,
-		title
-		)
-		`
-		)
-		.eq('id', id)
-		.limit(1)
-		.single();
+	const entry = await getSingleEntry(id);
 
 	if (!entry) {
 		return <p>Couldn&apos;t load entry data.</p>;

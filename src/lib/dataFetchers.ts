@@ -31,3 +31,25 @@ export async function getJobs() {
 
 	return userJobs;
 }
+
+export async function getSingleEntry(id: string) {
+	const { data: entry } = await supabase
+		.from('WorkingEntries')
+		.select(
+			`
+		id,
+		begin,
+		end,
+		job_id,
+Jobs (
+	id,
+	title
+	)
+	`
+		)
+		.eq('id', id)
+		.limit(1)
+		.single();
+
+	return entry;
+}
