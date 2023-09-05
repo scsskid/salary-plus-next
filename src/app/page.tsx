@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import Calendar from '@/components/Calendar/Calendar';
 import { getWorkingEntries } from '@/lib/dataFetchers';
 import InputDateProviderWrapper from '@/components/InputDateProviderWrapper';
