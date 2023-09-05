@@ -1,7 +1,13 @@
+'use client';
+
 import Link from 'next/link';
-import styles from './Header.module.css';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
+	const pathname = usePathname();
+
+	console.log(pathname);
+
 	return (
 		<header className="wrap site-header">
 			<p className="logo">
@@ -9,16 +15,16 @@ export default function Header() {
 			</p>
 			<nav className="main-navigation">
 				<ol>
-					<li>
+					<li className={pathname === '/' ? 'active' : ''}>
 						<Link href="/">Calendar</Link>
 					</li>
-					<li>
+					<li className={pathname === '/report' ? 'active' : ''}>
 						<Link href="/report">Report</Link>
 					</li>
-					<li>
+					<li className={pathname === '/account' ? 'active' : ''}>
 						<Link href="/account">Account</Link>
 					</li>
-					<li>
+					<li className={pathname === '/dev' ? 'active' : ''}>
 						<Link href="/dev">Dev</Link>
 					</li>
 				</ol>

@@ -16,3 +16,13 @@
 	display: flex;
 	gap: 1rem;
 }
+
+.main-navigation .active {
+	background-color: var(--color-base);
+
+	font-weight: bold;
+
+	& a {
+		color: #fff;
+	}
+}
