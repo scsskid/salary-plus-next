@@ -1,19 +1,7 @@
 import Link from 'next/link';
-
 import styles from './Header.module.css';
-import RevalidateButton from './RevalidateButton';
-import { revalidatePath } from 'next/cache';
 
-type Props = {};
-
-export default function Header({}: Props) {
-	const purge = async () => {
-		'use server';
-
-		revalidatePath('/');
-		return;
-	};
-
+export default function Header() {
 	return (
 		<header className={`wrap ${styles.header}`}>
 			<p className={styles.logo}>
@@ -32,9 +20,6 @@ export default function Header({}: Props) {
 					</li>
 					<li>
 						<Link href="/dev">Dev</Link>
-					</li>
-					<li style={{ marginLeft: 'auto' }}>
-						<RevalidateButton formHandler={purge} />
 					</li>
 				</ol>
 			</nav>
