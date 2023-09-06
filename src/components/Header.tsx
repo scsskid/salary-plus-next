@@ -6,8 +6,6 @@ import { usePathname } from 'next/navigation';
 export default function Header() {
 	const pathname = usePathname();
 
-	console.log(pathname);
-
 	return (
 		<header className="wrap site-header">
 			<p className="logo">
