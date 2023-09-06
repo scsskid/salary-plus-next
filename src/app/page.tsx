@@ -12,7 +12,7 @@ export default async function Home() {
 	return (
 		<div className="flow">
 			<section>
-				<h2>Calendar</h2>
+				<h1>Calendar</h1>
 				<InputDateProviderWrapper>
 					{/* @ts-ignore  */}
 					<Calendar entries={entries} />
