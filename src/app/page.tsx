@@ -11,13 +11,11 @@ export default async function Home() {
 
 	return (
 		<div className="flow">
-			<section>
-				<h1>Calendar</h1>
-				<InputDateProviderWrapper>
-					{/* @ts-ignore  */}
-					<Calendar entries={entries} />
-				</InputDateProviderWrapper>
-			</section>
+			<h1>Calendar</h1>
+			<InputDateProviderWrapper>
+				{/* @ts-ignore  */}
+				<Calendar entries={entries} />
+			</InputDateProviderWrapper>
 		</div>
 	);
 }
