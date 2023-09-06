@@ -1,3 +1,5 @@
+import Calendar from '@/components/Calendar/Calendar';
+import { getWorkingEntries } from '@/lib/dataFetchers';
 import { notFound } from 'next/navigation';
 
 type Props = {
@@ -5,30 +7,16 @@ type Props = {
 		dateSegments: string[];
 	};
 };
-export default function InputDatePage({ params }: Props) {
+export default async function InputDatePage({ params }: Props) {
 	const { dateSegments } = params;
-	let mode = 'year';
 
-	switch (dateSegments.length) {
-		case 2:
-			mode = 'month';
-			if (isNaN(Number(dateSegments[1])) || dateSegments[1].length > 2) {
-				return notFound();
-			}
-			break;
-		case 3:
-			mode = 'day';
-			if (isNaN(Number(dateSegments[2])) || dateSegments[2].length > 2) {
-				return notFound();
-			}
-			break;
-	}
+	const year = dateSegments[0] || '1970';
+	const month = dateSegments[1] || '1';
+	const day = dateSegments[2] || '1';
 
-	const year = dateSegments[0];
-	const month = dateSegments[1];
-	const day = dateSegments[2];
+	const entries = await getWorkingEntries();
 
-	console.log({ dateSegments, year, month, day });
+	const inputDateFromParams = new Date(`${year}-${month}-${day}`);
 
 	if (dateSegments.length === 0 || isNaN(Number(year)) || year.length !== 4) {
 		return notFound();
@@ -37,8 +25,22 @@ export default function InputDatePage({ params }: Props) {
 	return (
 		<div>
 			<h1>InputDatePage</h1>
-			<p>Mode: {mode}</p>
-			<pre>{JSON.stringify({ year, month, day }, null, 2)}</pre>
+			<pre>
+				{JSON.stringify(
+					{
+						year,
+						month,
+						day,
+						inputDateFromParams:
+							inputDateFromParams.toLocaleDateString('de-DE'),
+					},
+					null,
+					2
+				)}
+			</pre>
+			<h2>Calendar</h2>
+			{/* @ts-ignore */}
+			<Calendar inputDate={inputDateFromParams} entries={entries} />
 		</div>
 	);
 }
