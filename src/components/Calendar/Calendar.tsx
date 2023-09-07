@@ -16,12 +16,8 @@ export default function CalendarBody({
 	inputDateFromParams: inputDate,
 	entries,
 }: Props) {
-	// const { inputDate } = useInputDate();
-
 	/* @ts-ignore  */
 	const entiresOfDay = filterEntriesByBegin(entries, inputDate, isSameDay);
-
-	console.log({ inputDate, entiresOfDay });
 
 	return (
 		<div className="calendar-body">

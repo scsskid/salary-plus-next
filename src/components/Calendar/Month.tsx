@@ -3,9 +3,6 @@ import Week from './Week';
 
 export default function Month({
 	startDate = new Date(),
-	handleDateClick = () => {
-		console.warn('no handler defined');
-	},
 	jobs = [],
 	entries = [],
 }) {
@@ -32,7 +29,6 @@ export default function Month({
 			<Week
 				key={i}
 				startDate={requestedDate}
-				handleDateClick={handleDateClick}
 				jobs={jobs}
 				requestedMonthIndex={requestedMonthIndex}
 				bleedMonth={false}

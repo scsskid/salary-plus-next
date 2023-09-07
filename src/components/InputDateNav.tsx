@@ -3,12 +3,16 @@ import Link from 'next/link';
 
 type Props = {
 	inputDate: Date;
+	basePath?: string;
 };
-export default function InputDateNav({ inputDate }: Props) {
-	const prevMonthRoute = `/calendar/${getDateString(
+export default function InputDateNav({
+	inputDate = new Date(),
+	basePath = '/calendar',
+}: Props) {
+	const prevMonthRoute = `${basePath}/${getDateString(
 		getMonthDate(inputDate, -1)
 	)}`;
-	const nextMonthRoute = `/calendar/${getDateString(
+	const nextMonthRoute = `${basePath}/${getDateString(
 		getMonthDate(inputDate, 1)
 	)}`;
 
@@ -23,9 +27,11 @@ export default function InputDateNav({ inputDate }: Props) {
 					Next Month
 				</Link>
 
-				<Link className="ui-btn" href="/calendar">
-					Today
-				</Link>
+				{basePath === '/calendar' && (
+					<Link className="ui-btn" href="/calendar">
+						Today
+					</Link>
+				)}
 			</nav>
 
 			<h3>
@@ -53,7 +59,7 @@ function getMonthDate(inputDate: Date, shift: number) {
 	return month;
 }
 
-function getDateString(date: Date) {
+export function getDateString(date: Date) {
 	const returnDate = new Date(date);
 	const year = returnDate.getFullYear();
 	const month = returnDate.getMonth() + 1;

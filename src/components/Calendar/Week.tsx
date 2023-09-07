@@ -1,13 +1,13 @@
 import { filterEntriesByBegin, isSameDay } from '@/lib/helpers';
 import { useInputDate } from '@/lib/hooks/useInputDateContext';
 import { Job, WorkingEntryWithJob } from '@/types/entries';
-import { MouseEventHandler } from 'react';
+import Link from 'next/link';
+import { getDateString } from '../InputDateNav';
 
 type Props = {
 	startDate?: Date;
 	entries?: any[];
 	jobs?: Job[];
-	handleDateClick: MouseEventHandler<HTMLButtonElement>;
 	requestedMonthIndex: number;
 	bleedMonth?: boolean;
 };
@@ -16,12 +16,9 @@ export default function Week({
 	startDate = new Date('1982/10/04'),
 	entries = [],
 	jobs = [],
-	handleDateClick = () => {
-		console.warn('no handler for dateClick');
-	},
 	requestedMonthIndex = 0,
 	bleedMonth = false,
-}) {
+}: Props) {
 	const endDate = new Date(startDate);
 	endDate.setDate(startDate.getDate() + 7);
 
@@ -41,7 +38,6 @@ export default function Week({
 				<DateCell
 					key={'datecell-' + d}
 					date={new Date(d)}
-					handleDateClick={handleDateClick}
 					entries={entries}
 					jobs={jobs}
 					isBleedDate={isBleedDate}
@@ -55,7 +51,6 @@ export default function Week({
 
 type DateCellProps = {
 	date: Date;
-	handleDateClick: MouseEventHandler<HTMLButtonElement>;
 	entries: WorkingEntryWithJob[];
 	jobs: Job[];
 	isBleedDate: boolean;
@@ -69,7 +64,7 @@ function DateCell({
 }: DateCellProps) {
 	/* filter entries.begin if it matches date */
 
-	const { inputDate, setInputDate } = useInputDate();
+	const { inputDate } = useInputDate();
 
 	const inputDateIsDate = isSameDay(inputDate, date);
 	const entiresOfDay = filterEntriesByBegin(entries, date, isSameDay);
@@ -87,12 +82,10 @@ function DateCell({
 				opacity: isBleedDate ? 0.2 : 1,
 			}}
 		>
-			<button
-				type="button"
+			<Link
+				href={`/calendar/${getDateString(date)}`}
 				style={{ color: inputDateIsDate ? 'red' : 'currentColor' }}
 				className="calendar-date-button"
-				onClick={() => setInputDate(date)}
-				// onKeyUp={handleKeyUp}
 			>
 				<div className="calendar-date-button-figure">
 					<span>{date.getDate()}</span>
@@ -105,7 +98,7 @@ function DateCell({
 						))}
 					</div>
 				)}
-			</button>
+			</Link>
 		</div>
 	);
 }
