@@ -14,7 +14,10 @@ export default function Header() {
 			<nav className="main-navigation">
 				<ol>
 					<li className={pathname === '/' ? 'active' : ''}>
-						<Link href="/">Calendar</Link>
+						<Link href="/">Home</Link>
+					</li>
+					<li className={pathname === '/calendar' ? 'active' : ''}>
+						<Link href="/calendar">Calendar</Link>
 					</li>
 					<li className={pathname === '/report' ? 'active' : ''}>
 						<Link href="/report">Report</Link>
