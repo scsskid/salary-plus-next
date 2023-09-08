@@ -3,6 +3,15 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+const navItems = [
+	{ href: '/', text: 'Home', key: 'home' },
+	{ href: '/calendar', text: 'Calendar', key: 'calendar' },
+	{ href: '/report', text: 'Report', key: 'report' },
+	{ href: '/account', text: 'Account', key: 'account' },
+	{ href: '/dev', text: 'Dev', key: 'dev' },
+	{ href: '/login', text: 'Sign Up/Sign In', key: 'login' },
+];
+
 export default function Header() {
 	const pathname = usePathname();
 
@@ -13,21 +22,14 @@ export default function Header() {
 			</p>
 			<nav className="main-navigation">
 				<ol>
-					<li className={pathname === '/' ? 'active' : ''}>
-						<Link href="/">Home</Link>
-					</li>
-					<li className={pathname === '/calendar' ? 'active' : ''}>
-						<Link href="/calendar">Calendar</Link>
-					</li>
-					<li className={pathname === '/report' ? 'active' : ''}>
-						<Link href="/report">Report</Link>
-					</li>
-					<li className={pathname === '/account' ? 'active' : ''}>
-						<Link href="/account">Account</Link>
-					</li>
-					<li className={pathname === '/dev' ? 'active' : ''}>
-						<Link href="/dev">Dev</Link>
-					</li>
+					{navItems.map((item) => (
+						<li
+							key={item.key}
+							className={pathname === item.href ? 'active' : ''}
+						>
+							<Link href={item.href}>{item.text}</Link>
+						</li>
+					))}
 				</ol>
 			</nav>
 		</header>
