@@ -36,27 +36,6 @@ export interface Database {
         }
         Relationships: []
       }
-      Users: {
-        Row: {
-          created_at: string
-          email: string
-          id: number
-          password: string
-        }
-        Insert: {
-          created_at?: string
-          email: string
-          id?: number
-          password: string
-        }
-        Update: {
-          created_at?: string
-          email?: string
-          id?: number
-          password?: string
-        }
-        Relationships: []
-      }
       Wages: {
         Row: {
           amount: number
@@ -96,7 +75,6 @@ export interface Database {
           id: number
           job_id: number
           sick_leave: boolean
-          user_id: number
         }
         Insert: {
           begin: string
@@ -105,7 +83,6 @@ export interface Database {
           id?: number
           job_id: number
           sick_leave?: boolean
-          user_id: number
         }
         Update: {
           begin?: string
@@ -114,19 +91,12 @@ export interface Database {
           id?: number
           job_id?: number
           sick_leave?: boolean
-          user_id?: number
         }
         Relationships: [
           {
             foreignKeyName: "WorkingEntries_job_id_fkey"
             columns: ["job_id"]
             referencedRelation: "Jobs"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "WorkingEntries_user_id_fkey"
-            columns: ["user_id"]
-            referencedRelation: "Users"
             referencedColumns: ["id"]
           }
         ]
