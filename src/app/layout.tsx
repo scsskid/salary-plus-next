@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Fira_Sans } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import AuthStatus from '@/components/AuthStatus';
 
 const fira = Fira_Sans({
 	weight: ['400', '700'],
@@ -27,6 +28,7 @@ export default function RootLayout({
 			<body className={fira.className}>
 				<div className="container">
 					<Header />
+					<AuthStatus />
 					<div className="wrap">{children}</div>
 					<Footer />
 				</div>

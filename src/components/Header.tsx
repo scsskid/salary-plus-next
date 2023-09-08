@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import AuthStatus from './AuthStatus';
 
 const navItems = [
 	{ href: '/', text: 'Home', key: 'home' },

@@ -9,7 +9,6 @@ export async function getWorkingEntries() {
 	end,
 	sick_leave,
 	job_id,
-	user_id,
 	Jobs (
 		id,
 		title,
@@ -22,10 +21,10 @@ export async function getWorkingEntries() {
 }
 
 export async function getJobs() {
+	// Todo: Authenticated User
 	const { data: userJobs } = await supabase
 		.from('Jobs')
 		.select('*')
-		// Todo: Authenticated User
 		.eq('user_id', 1);
 
 	return userJobs;

@@ -9,9 +9,9 @@ const options = {
 	auth: { persistSession: false },
 };
 
-export const supabase = createClient<Database>(projectUrl, anonKey, options);
-export const supabaseBackend = createClient<Database>(
-	projectUrl,
-	secretKey,
-	options
-);
+export const supabase = createClient<Database>(projectUrl, anonKey, {
+	auth: { persistSession: true },
+});
+export const supabaseBackend = createClient<Database>(projectUrl, secretKey, {
+	auth: { persistSession: true },
+});

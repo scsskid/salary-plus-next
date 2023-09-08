@@ -3,16 +3,32 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 import type { Database } from '@/types/database.types';
+import { revalidatePath } from 'next/cache';
 
-export const dynamic = 'force-dynamic';
+export async function GET(request: Request) {
+	console.log('GET /auth/logout');
 
-export async function POST(request: Request) {
 	const requestUrl = new URL(request.url);
 	const supabase = createRouteHandlerClient<Database>({ cookies });
 
-	await supabase.auth.signOut();
+	// Check if we have a session
+	const {
+		data: { session },
+	} = await supabase.auth.getSession();
 
-	return NextResponse.redirect(`${requestUrl.origin}/login`, {
-		status: 301,
+	if (!session) {
+		console.log('No session found');
+	}
+
+	const { error } = await supabase.auth.signOut();
+
+	if (error) {
+		console.error(error);
+	}
+
+	revalidatePath('/');
+
+	return NextResponse.redirect(`${requestUrl.origin}/`, {
+		status: 302,
 	});
 }
