@@ -9,7 +9,6 @@ export default async function Home() {
 
 	return (
 		<div className="flow">
-			<pre>{JSON.stringify({ session, data }, null, 2)}</pre>
 			<p>
 				<Link href="/calendar">Calendar</Link>
 			</p>

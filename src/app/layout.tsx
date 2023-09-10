@@ -28,7 +28,6 @@ export default function RootLayout({
 			<body className={fira.className}>
 				<div className="container">
 					<Header />
-					<AuthStatus />
 					<div className="wrap">{children}</div>
 					<Footer />
 				</div>
