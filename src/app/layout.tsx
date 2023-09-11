@@ -18,6 +18,12 @@ export const metadata: Metadata = {
 	description: '',
 };
 
+/*
+Since the whole application depends on cookies when using database auth 'force-dymanic'
+is added to the root layout
+*/
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({
 	children,
 }: {
